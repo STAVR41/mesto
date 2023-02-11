@@ -20,3 +20,4 @@ popupButton.addEventListener("click", function (e) {
    profileAchievements.textContent = popupAchievements.value;
    popup.classList.remove("active");
 });
+
