@@ -13,7 +13,7 @@ for (let index = 0; index < redact.length; index++) {
 let popupButton = document.querySelector(".popup__save");
 
 popupButton.addEventListener("click", function (e) {
-
+   e.preventDefault();
    let profileName = document.querySelector(".profile__title");
    let profileAchievements = document.querySelector(".profile__subtitle");
    profileName.textContent = popupName.value;
