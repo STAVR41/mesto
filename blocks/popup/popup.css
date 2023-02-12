@@ -1,7 +1,5 @@
 .popup {
-   opacity: 0;
-   visibility: hidden;
-   transition: top 0.6s linear;
+   display: none;
  }
 .popup::after {
    content: "";
@@ -13,10 +11,6 @@
    top: 0;
    left: 0;
  }
- .popup.active {
-   opacity: 1;
-   visibility: visible;
- }
- .popup.active > .popup__container {
-   top: 195px;
+ .popup.popup__opened {
+   display: block;
  }

@@ -4,11 +4,15 @@
    line-height: 48px;
    margin: 0 0 11px;
    max-width: 300px;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   overflow: hidden;
  }
  @media (max-width: 700px) {
    .profile__title {
-     margin: 0 0 9px 28px;
+     margin: 0 0 9px 46px;
      font-size: 27px;
      line-height: 33px;
+     max-width: 200px;
    }
  }
