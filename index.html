@@ -39,7 +39,7 @@
             <img src="images/elbrus.png" alt="Гора-Эльбрус" class="card__img">
             <div class="card__text-block">
                <h2 class="card__title">Гора Эльбрус</h2>
-               <div class="card__like card__like_active"></div>
+               <div class="card__like"></div>
             </div>
          </article>
          <article class="card">
@@ -75,7 +75,7 @@
    <footer class="footer">
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
    </footer>
-   <div class="popup">
+   <div class="popup popup_type_redact">
       <div class="popup__container">
          <h3 class="popup__title">Редактировать профиль</h3>
          <form action="#" name="Form" novalidate class="form">
@@ -86,6 +86,26 @@
          <button tabindex="4" type="button" class="popup__close"></button>
       </div>
    </div>
+   <div class="popup popup_type_card">
+      <div class="popup__container">
+         <h3 class="popup__title">Новое место</h3>
+         <form action="#" name="Form" novalidate class="form">
+            <input tabindex="1" type="text" name="profileName" class="form__input form__input_type_name">
+            <input tabindex="2" type="text" name="profileJob" class="form__input form__input_type_job">
+            <button tabindex="3" type="submit" class="form__save">Сохранить</button>
+         </form>
+         <button tabindex="4" type="button" class="popup__close"></button>
+      </div>
+   </div>
+   <template id="card">
+      <article class="card">
+         <img src="" alt="" class="card__img">
+         <div class="card__text-block">
+            <h2 class="card__title"></h2>
+            <button type="button" class="card__like"></button>
+         </div>
+      </article>
+   </template>
    <script src="scripts/script.js"></script>
 </body>
 
