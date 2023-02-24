@@ -4,47 +4,43 @@ const nameInput = document.querySelector(".form__input_type_name");
 const jobInput = document.querySelector(".form__input_type_job");
 const textInput = document.querySelector(".form__input_type_text");
 const linkInput = document.querySelector(".form__input_type_link");
-
 const profileName = document.querySelector(".profile__title");
 const profileJob = document.querySelector(".profile__subtitle");
 const openPopupButtonProfile = document.querySelector(".profile__edit-button");
 const addCardButton = document.querySelector(".profile__add-button");
 const popupCard = document.querySelector(".popup_type_card");
 const closePopupButton = document.querySelectorAll(".popup__close");
-
 const cardsBlock = document.querySelector(".cards");
+const formCard = document.querySelector(".form_type_card");
+const popupImg = document.querySelector(".popup_type_img");
+const imgPopup = document.querySelector(".popup__img");
+const captionPopup = document.querySelector(".popup__caption");
 const initialCards = [
    {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+      name: 'Frog',
+      link: 'https://i.gifer.com/origin/6b/6b72817f6498f551062b2788084cb1f6_w200.gif'
    },
    {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+      name: 'Ricardo',
+      link: 'https://www.meme-arsenal.com/memes/c84127c51d392963f20772d51ed76ffd.jpg'
    },
    {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+      name: 'Клоун',
+      link: 'https://www.meme-arsenal.com/memes/308998085969483b920bf7bb77bf01f1.jpg'
    },
    {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+      name: 'Simpsons',
+      link: 'https://i.gifer.com/origin/ee/ee906a8fdddcf6a8f14d3faf63b1d078_w200.gif'
    },
    {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+      name: 'Koreyka',
+      link: 'https://media.tenor.com/K4pbXRYZmA8AAAAd/%D0%B0%D0%B1%D0%BE%D0%B1%D1%83%D1%81-%D0%B4%D0%B0%D1%88%D0%B0.gif'
    },
    {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+      name: 'KoronaTime',
+      link: 'https://s1.bloknot-krasnodar.ru/thumb/850x0xcut/upload/iblock/6af/4aumvukqnzwpv9ibeblhhjz6fbo419mm/b5b5db5b3f4507784922742775bd4dea.png'
    }
 ];
-const formCard = document.querySelector(".form_card");
-const popupImg = document.querySelector(".popup_type_img");
-
-
-////////////////////
-///////////////////
 function createCard(name, link) {
    const newCard = document.querySelector("#card").content.cloneNode(true);
    newCard.querySelector(".card__img").src = link;
@@ -55,76 +51,50 @@ function createCard(name, link) {
    newCard.querySelector(".card__delite").addEventListener("click", deliteCard);
    cardsBlock.prepend(newCard);
 };
-
-const img = document.querySelector(".popup__img");
-const caption = document.querySelector(".popup__caption");
 initialCards.forEach(item => { createCard(item.name, item.link) });
-
-//Открытие модального окна с картинкой
 function openModalImg(e) {
-   img.src = e.target.src
-   caption.textContent = e.target.alt;
+   imgPopup.src = e.target.src
+   captionPopup.textContent = e.target.alt;
    openPopup(popupImg)
 };
-
-
-//Удаление карточек
 function deliteCard(e) {
    e.target.closest(".card").remove();
 };
-
-
-//Активный лайк
 function clickLikeCard(e) {
    e.target.classList.toggle("card__like_active");
 };
-
-
 function handleFormSubmit(evt) {
    evt.preventDefault();
    profileName.textContent = nameInput.value;
    profileJob.textContent = jobInput.value;
    closePopup(popupRedact);
 };
-
 function openPopup(item) {
    item.classList.add("popup_opened");
 };
 function closePopup(item) {
    item.classList.remove("popup_opened");
 };
-
-
-//Открытие попап редактирования профиля
 openPopupButtonProfile.addEventListener("click", function () {
    nameInput.value = profileName.textContent;
    jobInput.value = profileJob.textContent;
    openPopup(popupRedact)
 });
-
-
-//Закрытие обоих попапов
 closePopupButton.forEach(item => {
    item.addEventListener("click", function () {
       const element = item.closest(".popup");
       closePopup(element);
    });
 });
-
-
-//Открытие попап с карточками
 addCardButton.addEventListener("click", function () {
    openPopup(popupCard);
 });
-
-// Заполнение профиля
 formElement.addEventListener('submit', handleFormSubmit);
-
-
-//Добавление новой карточки
 function addCard(e) {
    e.preventDefault();
    closePopup(popupCard);
    createCard(textInput.value, linkInput.value);
+   textInput.value = "";
+   linkInput.value = "";
 };
 formCard.addEventListener("submit", addCard);
