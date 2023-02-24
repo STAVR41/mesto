@@ -7,6 +7,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" href="pages/index.css">
    <title>Mesto</title>
+   <script src="scripts/script.js" defer></script>
 </head>
 
 <body class="wrapper">
@@ -90,11 +91,18 @@
       <div class="popup__container">
          <h3 class="popup__title">Новое место</h3>
          <form action="#" name="Form" novalidate class="form form_card">
-            <input tabindex="1" type="text" name="profileName" class="form__input form__input_type_name" placeholder="Название">
-            <input tabindex="2" type="text" name="profileJob" class="form__input form__input_type_job" placeholder="Ссылка на картинку">
+            <input tabindex="1" type="text" name="profileName" class="form__input form__input_type_text" placeholder="Название">
+            <input tabindex="2" type="text" name="profileJob" class="form__input form__input_type_link" placeholder="Ссылка на картинку">
             <button tabindex="3" type="submit" class="form__save">Сохранить</button>
          </form>
          <button tabindex="4" type="button" class="popup__close"></button>
+      </div>
+   </div>
+   <div class="popup popup_type_img">
+      <div class="popup__imgBlock">
+         <img src="" alt="" class="popup__img">
+         <div class="popup__caption"></div>
+         <button class="popup__close" type="button"></button>
       </div>
    </div>
    <template id="card">
@@ -104,9 +112,9 @@
             <h2 class="card__title"></h2>
             <button type="button" class="card__like"></button>
          </div>
+         <button class="card__delite" type="button"></button>
       </article>
    </template>
-   <script src="scripts/script.js"></script>
 </body>
 
 </html>
