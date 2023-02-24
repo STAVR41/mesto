@@ -7,6 +7,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" href="pages/index.css">
    <title>Mesto</title>
+   <script src="scripts/cards.js" defer></script>
    <script src="scripts/script.js" defer></script>
 </head>
 
@@ -38,9 +39,9 @@
    <div class="popup popup_type_redact">
       <div class="popup__container">
          <h3 class="popup__title">Редактировать профиль</h3>
-         <form action="#" name="Form" novalidate class="form">
-            <input tabindex="1" type="text" name="profileName" class="form__input form__input_type_name">
-            <input tabindex="2" type="text" name="profileJob" class="form__input form__input_type_job">
+         <form action="#" name="form" novalidate class="form">
+            <input tabindex="1" type="text" name="profileName" class="form__input form__input_type_name" placeholder="Имя" required>
+            <input tabindex="2" type="text" name="profileJob" class="form__input form__input_type_job" placeholder="Профессия" required>
             <button tabindex="3" type="submit" class="form__save">Сохранить</button>
          </form>
          <button tabindex="4" type="button" class="popup__close"></button>
@@ -49,9 +50,9 @@
    <div class="popup popup_type_card">
       <div class="popup__container">
          <h3 class="popup__title">Новое место</h3>
-         <form action="#" name="Form" novalidate class="form form_type_card">
-            <input tabindex="1" type="text" name="profileName" class="form__input form__input_type_text" placeholder="Название">
-            <input tabindex="2" type="text" name="profileJob" class="form__input form__input_type_link" placeholder="Ссылка на картинку">
+         <form action="#" name="form" novalidate class="form form_type_card">
+            <input tabindex="1" type="text" name="cardName" class="form__input form__input_type_text" placeholder="Название">
+            <input tabindex="2" type="url" name="cardImg" class="form__input form__input_type_link" placeholder="Ссылка на картинку">
             <button tabindex="3" type="submit" class="form__save">Создать</button>
          </form>
          <button tabindex="4" type="button" class="popup__close"></button>
@@ -75,4 +76,5 @@
       </article>
    </template>
 </body>
+
 </html>
