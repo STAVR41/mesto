@@ -18,27 +18,27 @@ const captionPopup = document.querySelector(".popup__caption");
 const cardsTemplate = document.querySelector("#card").content;
 
 function createCard(card) {
-   const newCard = cardsTemplate.cloneNode(true);
+   const newCard = cardsTemplate.querySelector(".card").cloneNode(true);
    const newCardImage = newCard.querySelector(".card__img");
    const newCardTitle = newCard.querySelector(".card__title");
    newCardImage.src = card.link;
    newCardImage.alt = card.name;
-   newCardImage.addEventListener("click", () => openModalImg(newCardImage, newCardTitle));
+   newCardImage.addEventListener("click", () => openModalImg(card));
    newCardTitle.textContent = card.name;
    newCard.querySelector(".card__like").addEventListener("click", handleLikeClick);
    newCard.querySelector(".card__delite").addEventListener("click", deliteCard);
    return newCard;
 };
-function renderCard(item) {
-   cardsBlock.prepend(createCard(item));
+function renderCard(block, item) {
+   block.prepend(createCard(item));
 };
 initialCards.forEach(item => {
-   cardsBlock.prepend(createCard(item))
+   renderCard(cardsBlock ,item);
 });
-function openModalImg(link, name) {
-   imgPopup.src = link.src;
-   captionPopup.textContent = name.textContent;
-   imgPopup.alt = link.alt;
+function openModalImg(card) {
+   imgPopup.src = card.link;
+   captionPopup.textContent = card.name;
+   imgPopup.alt = card.name;
    openPopup(popupImg)
 };
 function deliteCard(e) {
@@ -67,7 +67,7 @@ function closePopup(item) {
 function addCard(e) {
    e.preventDefault();
    closePopup(popupCard);
-   renderCard({
+   renderCard(cardsBlock,{
       name: nameInputCard.value,
       link: linkInput.value,
    });
