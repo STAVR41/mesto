@@ -7,6 +7,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" href="pages/index.css">
    <title>Mesto</title>
+   <script src="scripts/validate.js" defer></script>
    <script src="scripts/cards.js" defer></script>
    <script src="scripts/script.js" defer></script>
 </head>
@@ -39,9 +40,11 @@
    <div class="popup popup_type_redact">
       <div class="popup__container">
          <h3 class="popup__title">Редактировать профиль</h3>
-         <form action="#" name="form" novalidate class="form">
-            <input tabindex="1" type="text" name="profileName" class="form__input form__input_type_name" placeholder="Имя" required>
-            <input tabindex="2" type="text" name="profileJob" class="form__input form__input_type_job" placeholder="Профессия" required>
+         <form action="#" name="form" novalidate class="form form_type_redact">
+            <input maxlength="40" minlength="2" id="name-input" tabindex="1" type="text" name="profileName" class="form__input form__input_type_name" placeholder="Имя" required>
+            <span class="name-input-error form__input-error"></span>
+            <input maxlength="200" minlength="2" id="job-input" tabindex="2" type="text" name="profileJob" class="form__input form__input_type_job" placeholder="Профессия" required>
+            <span class="job-input-error form__input-error"></span>
             <button tabindex="3" type="submit" class="form__save">Сохранить</button>
          </form>
          <button tabindex="4" type="button" class="popup__close"></button>
@@ -51,8 +54,10 @@
       <div class="popup__container">
          <h3 class="popup__title">Новое место</h3>
          <form action="#" name="form" novalidate class="form form_type_card">
-            <input tabindex="1" type="text" name="cardName" class="form__input form__input_type_text" placeholder="Название">
-            <input tabindex="2" type="url" name="cardImg" class="form__input form__input_type_link" placeholder="Ссылка на картинку">
+            <input required maxlength="30" minlength="2" tabindex="1" type="text" name="cardName" id="cardName-input" class="form__input form__input_type_text" placeholder="Название">
+            <span class="cardName-input-error form__input-error"></span>
+            <input required tabindex="2" type="url" name="cardImg" id="link-input" class="form__input form__input_type_link" placeholder="Ссылка на картинку">
+            <span class="link-input-error form__input-error"></span>
             <button tabindex="3" type="submit" class="form__save">Создать</button>
          </form>
          <button tabindex="4" type="button" class="popup__close"></button>
