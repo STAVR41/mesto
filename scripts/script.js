@@ -17,7 +17,7 @@ const captionPopup = document.querySelector(".popup__caption");
 const cardsTemplate = document.querySelector("#card").content;
 const formEdit = document.querySelector(".form_type_redact");
 const nameInput = formEdit.querySelector(".form__input_type_name");
-const popup = document.querySelectorAll(".popup");
+
 
 function createCard(card) {
 	const newCard = cardsTemplate.querySelector(".card").cloneNode(true);
@@ -63,9 +63,17 @@ function openPopupEdit() {
 }
 function openPopup(item) {
 	item.classList.add("popup_opened");
+	document.addEventListener("keyup", closePopupEscape);
+	document.addEventListener("click", evt => {
+		closePopupClickOverlay(evt);	
+	});
 }
 function closePopup(item) {
 	item.classList.remove("popup_opened");
+	document.removeEventListener("keyup", closePopupEscape);
+	document.removeEventListener("click", evt => {
+		closePopupClickOverlay(evt);	
+	});
 }
 function addCard(e) {
 	e.preventDefault();
@@ -77,18 +85,15 @@ function addCard(e) {
 	formCard.reset();
 }
 function closePopupEscape(evt) {
-	popup.forEach(item => {
-		if (evt.key === "Escape") {
-			item.classList.remove("popup_opened");
-		}
-	});
+	if (evt.key === "Escape") {
+		const popup = document.querySelector(".popup.popup_opened");
+		closePopup(popup);
+	}
 }
-function closePopupClickOverlay(item) {
-	popup.forEach(elem => {
-		if (!(item.target.closest(".popup__container") || item.target.closest(".profile__edit-button") || item.target.closest(".profile__add-button") || item.target.closest(".card__img") || item.target.closest(".popup__img"))) {
-			elem.classList.remove("popup_opened");
-		}
-	});
+function closePopupClickOverlay(evt) {
+	if (evt.target.classList.contains("popup")) {
+		closePopup(evt.target);
+	}
 }
 
 buttonsClosePopups.forEach(item => {
@@ -97,11 +102,9 @@ buttonsClosePopups.forEach(item => {
 		closePopup(element);
 	});
 });
-addCardButton.addEventListener("click", function () {
+addCardButton.addEventListener("click", () => {
 	openPopup(popupCard);
 });
 formRedactProfile.addEventListener("submit", handleFormSubmitRedactProfile);
 formCard.addEventListener("submit", addCard);
 openPopupButtonProfile.addEventListener("click", openPopupEdit);
-document.addEventListener("keyup", closePopupEscape);
-document.addEventListener("click", closePopupClickOverlay);
