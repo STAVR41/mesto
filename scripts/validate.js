@@ -65,3 +65,12 @@ function enableValidation(config) {
 	});
 }
 enableValidation(config);
+
+function disableButton(formElement ,config) {
+	const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
+	const buttonElement = formElement.querySelector(config.submitButtonSelector);
+	toggleButtonState(inputList, buttonElement, config);
+	inputList.forEach((inputElement) => {
+		hideError(formElement, inputElement, config);
+	});
+}

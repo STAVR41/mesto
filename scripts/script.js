@@ -60,7 +60,6 @@ function openPopupEdit() {
 	nameInput.value = profileName.textContent;
 	jobInput.value = profileJob.textContent;
 	openPopup(popupRedact);
-	enableValidation(config);
 }
 function openPopup(item) {
 	item.classList.add("popup_opened");
@@ -102,7 +101,7 @@ buttonsClosePopups.forEach(item => {
 addCardButton.addEventListener("click", () => {
 	openPopup(popupCard);
 	formCard.reset();
-	enableValidation(config);
+	disableButton(formCard, config);
 });
 formRedactProfile.addEventListener("submit", handleFormSubmitRedactProfile);
 formCard.addEventListener("submit", addCard);
