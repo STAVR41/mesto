@@ -60,20 +60,17 @@ function openPopupEdit() {
 	nameInput.value = profileName.textContent;
 	jobInput.value = profileJob.textContent;
 	openPopup(popupRedact);
+	enableValidation(config);
 }
 function openPopup(item) {
 	item.classList.add("popup_opened");
 	document.addEventListener("keyup", closePopupEscape);
-	document.addEventListener("click", evt => {
-		closePopupClickOverlay(evt);	
-	});
+	document.addEventListener("click", closePopupClickOverlay);
 }
 function closePopup(item) {
 	item.classList.remove("popup_opened");
 	document.removeEventListener("keyup", closePopupEscape);
-	document.removeEventListener("click", evt => {
-		closePopupClickOverlay(evt);	
-	});
+	document.removeEventListener("click", closePopupClickOverlay);
 }
 function addCard(e) {
 	e.preventDefault();
@@ -104,6 +101,8 @@ buttonsClosePopups.forEach(item => {
 });
 addCardButton.addEventListener("click", () => {
 	openPopup(popupCard);
+	formCard.reset();
+	enableValidation(config);
 });
 formRedactProfile.addEventListener("submit", handleFormSubmitRedactProfile);
 formCard.addEventListener("submit", addCard);
