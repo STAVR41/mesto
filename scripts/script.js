@@ -17,6 +17,8 @@ const captionPopup = document.querySelector(".popup__caption");
 const cardsTemplate = document.querySelector("#card").content;
 const formEdit = document.querySelector(".form_type_redact");
 const nameInput = formEdit.querySelector(".form__input_type_name");
+const buttonSaveRedact = document.querySelector(".form__save_type_redact");
+const buttonSaveCard = document.querySelector(".form__save_type_card");
 
 
 function createCard(card) {
@@ -60,6 +62,8 @@ function openPopupEdit() {
 	nameInput.value = profileName.textContent;
 	jobInput.value = profileJob.textContent;
 	openPopup(popupRedact);
+	removeError(formEdit);
+	enableButton(buttonSaveRedact, config);
 }
 function openPopup(item) {
 	item.classList.add("popup_opened");
@@ -98,11 +102,19 @@ buttonsClosePopups.forEach(item => {
 		closePopup(element);
 	});
 });
+
 addCardButton.addEventListener("click", () => {
 	openPopup(popupCard);
 	formCard.reset();
-	disableButton(formCard, config);
+	disableButton(buttonSaveCard, config);
+	removeError(formCard);
 });
 formRedactProfile.addEventListener("submit", handleFormSubmitRedactProfile);
 formCard.addEventListener("submit", addCard);
 openPopupButtonProfile.addEventListener("click", openPopupEdit);
+
+
+
+
+
+

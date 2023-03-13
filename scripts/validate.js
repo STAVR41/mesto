@@ -24,7 +24,6 @@ function hideError(formElement, input, config) {
 function validForm(formElement, inputElement, config) {
 	if (!(inputElement.validity.valid)) {
 		showError(formElement ,inputElement, inputElement.validationMessage, config);
-         
 	} else {
 		hideError(formElement, inputElement, config);
 	} 
@@ -36,20 +35,27 @@ function hasInvalidInput(inputList) {
 	});
 }
 
+function disableButton(buttonElement, config) {
+	buttonElement.classList.add(config.inactiveButtonClass);
+	buttonElement.setAttribute("disabled", "");
+}
+
+function enableButton(buttonElement, config) {
+	buttonElement.classList.remove(config.inactiveButtonClass);
+	buttonElement.removeAttribute("disabled", "");
+}
+ 
 function toggleButtonState(inputList, buttonElement, config) {
 	if (hasInvalidInput(inputList)) {
-		buttonElement.classList.add(config.inactiveButtonClass);
-		buttonElement.setAttribute("disabled", "");
+		disableButton(buttonElement, config);
 	} else {
-		buttonElement.classList.remove(config.inactiveButtonClass);
-		buttonElement.removeAttribute("disabled", "");
+		enableButton(buttonElement, config);
 	}
 }
 
 function setEventListeners(formElement, config) {
 	const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
 	const buttonElement = formElement.querySelector(config.submitButtonSelector);
-	toggleButtonState(inputList, buttonElement, config);
 	inputList.forEach(item => {
 		item.addEventListener("input", () => {
 			validForm(formElement, item, config);
@@ -66,11 +72,9 @@ function enableValidation(config) {
 }
 enableValidation(config);
 
-function disableButton(formElement ,config) {
-	const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
-	const buttonElement = formElement.querySelector(config.submitButtonSelector);
-	toggleButtonState(inputList, buttonElement, config);
-	inputList.forEach((inputElement) => {
-		hideError(formElement, inputElement, config);
+function removeError(form) {
+	const inputList = form.querySelectorAll(".form__input");
+	inputList.forEach(item => {
+		hideError(form, item, config);
 	});
 }
