@@ -1,9 +1,9 @@
 export default class FormValidator {
-	constructor(data, form) {
-		this._data = data;
+	constructor(validationConfig, form) {
+		this._validationConfig = validationConfig;
 		this._formSelector = form;
-		this._inputSelector = Array.from(this._formSelector.querySelectorAll(data.inputSelector));
-		this._buttonElement = this._formSelector.querySelector(this._data.submitButtonSelector);
+		this._inputSelector = Array.from(this._formSelector.querySelectorAll(validationConfig.inputSelector));
+		this._buttonElement = this._formSelector.querySelector(this._validationConfig.submitButtonSelector);
 	}
 	removeError() {
 		this._toggleButtonState();
@@ -14,15 +14,15 @@ export default class FormValidator {
 
 	_showError(input ,errorMessage) {
 		const errorElement = this._formSelector.querySelector(`.${input.id}-error`);
-		input.classList.add(this._data.inputErrorClass);
-		errorElement.classList.add(this._data.errorClass);
+		input.classList.add(this._validationConfig.inputErrorClass);
+		errorElement.classList.add(this._validationConfig.errorClass);
 		errorElement.textContent = errorMessage;
 	}
     
 	_hideError(input) {
 		const errorElement = this._formSelector.querySelector(`.${input.id}-error`);
-		input.classList.remove(this._data.inputErrorClass);
-		errorElement.classList.remove(this._data.errorClass);
+		input.classList.remove(this._validationConfig.inputErrorClass);
+		errorElement.classList.remove(this._validationConfig.errorClass);
 		errorElement.textContent = "";
 	}
     
@@ -42,10 +42,10 @@ export default class FormValidator {
      
 	_toggleButtonState() {
 		if (this._hasInvalidInput()) {
-			this._buttonElement.classList.add(this._data.inactiveButtonClass);
+			this._buttonElement.classList.add(this._validationConfig.inactiveButtonClass);
 			this._buttonElement.setAttribute("disabled", "");
 		} else {
-			this._buttonElement.classList.remove(this._data.inactiveButtonClass);
+			this._buttonElement.classList.remove(this._validationConfig.inactiveButtonClass);
 			this._buttonElement.removeAttribute("disabled", "");
 		}
 	}
@@ -63,7 +63,4 @@ export default class FormValidator {
 		this._setEventListeners();
 	}
 }
-
-
-
 

@@ -1,10 +1,10 @@
 import FormValidator from "./FormValidator.js";
-import Card from "./card.js";
+import Card from "./Card.js";
+import { openPopup, closePopup } from "../utils/utils.js";
 import { initialCards as arrCards, config } from "./constans.js";
-export { openPopup};
 
 const popupRedact = document.querySelector(".popup_type_redact"),
-	form = document.querySelectorAll(".form"),
+	forms = document.querySelectorAll(".form"),
 	jobInput = document.querySelector(".form__input_type_job"),
 	nameInputCard = document.querySelector(".form__input_type_text"),
 	linkInput = document.querySelector(".form__input_type_link"),
@@ -15,11 +15,13 @@ const popupRedact = document.querySelector(".popup_type_redact"),
 	popupCard = document.querySelector(".popup_type_card"),
 	buttonsClosePopups = document.querySelectorAll(".popup__close"),
 	cardsBlock = document.querySelector(".cards"),
-	formCard = document.querySelector(".form_type_card"),
-	formEdit = document.querySelector(".form_type_redact"),
-	nameInput = formEdit.querySelector(".form__input_type_name");
+	formAddCard = document.querySelector(".form_type_card"),
+	formEditProfile = document.querySelector(".form_type_redact"),
+	nameInput = formEditProfile.querySelector(".form__input_type_name"),
+	validationFormAddCard =  new FormValidator(config, formAddCard),
+	validationFormRedactProfile = new FormValidator(config, formEditProfile);
 
-function newCard(item) {
+function renderCard(item) {
 	const card = new Card(item, "#card");
 	cardsBlock.prepend(card.createCard());
 }
@@ -27,19 +29,15 @@ function validationForm(item) {
 	const formValidation = new FormValidator(config, item);
 	formValidation.enableValidation();
 }
-function openPopup(item) {
-	item.classList.add("popup_opened");
-	document.addEventListener("keyup", closePopupEscape);
-	document.addEventListener("click", closePopupClickOverlay);
-}
+
 function addCard(e) {
 	e.preventDefault();
 	closePopup(popupCard);
-	newCard({
+	renderCard({
 		name: nameInputCard.value,
 		link: linkInput.value,
 	});
-	formCard.reset();
+	formAddCard.reset();
 }
 function handleFormSubmitRedactProfile(evt) {
 	evt.preventDefault();
@@ -50,28 +48,12 @@ function handleFormSubmitRedactProfile(evt) {
 function openPopupEdit() {
 	nameInput.value = profileName.textContent;
 	jobInput.value = profileJob.textContent;
-	new FormValidator(config, formEdit).removeError();
+	validationFormRedactProfile.removeError();
 	openPopup(popupRedact);
 }
-function closePopup(item) {
-	item.classList.remove("popup_opened");
-	document.removeEventListener("keyup", closePopupEscape);
-	document.removeEventListener("click", closePopupClickOverlay);
-}
-function closePopupEscape(evt) {
-	if (evt.key === "Escape") {
-		const popup = document.querySelector(".popup.popup_opened");
-		closePopup(popup);
-	}
-}
-function closePopupClickOverlay(evt) {
-	if (evt.target.classList.contains("popup")) {
-		closePopup(evt.target);
-	}
-}
 function removeErrorCardPopup() {
-	formCard.reset();
-	new FormValidator(config, formCard).removeError();
+	formAddCard.reset();
+	validationFormAddCard.removeError();
 	openPopup(popupCard);
 }
 buttonsClosePopups.forEach(item => {
@@ -80,12 +62,14 @@ buttonsClosePopups.forEach(item => {
 		closePopup(element);
 	});
 });
-arrCards.forEach(item => newCard(item));
-form.forEach(item => validationForm(item));
+arrCards.forEach(item => renderCard(item));
+forms.forEach(item => validationForm(item));
 addCardButton.addEventListener("click", removeErrorCardPopup);
-formEdit.addEventListener("submit", handleFormSubmitRedactProfile);
-formCard.addEventListener("submit", addCard);
+formEditProfile.addEventListener("submit", handleFormSubmitRedactProfile);
+formAddCard.addEventListener("submit", addCard);
 openPopupButtonProfile.addEventListener("click", openPopupEdit);
+
+
 
 
 
