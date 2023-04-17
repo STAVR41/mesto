@@ -5,14 +5,12 @@
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="pages/index.css">
    <title>Mesto</title>
-   <script type="module" src="scripts/index.js" defer></script>
 </head>
 
 <body class="wrapper">
    <header class="header">
-      <img src="images/logo.svg" alt="Изображение" class="header__logo">
+      <img src="<%=require('./images/logo.svg')%>" alt="Изображение" class="header__logo">
    </header>
    <main class="content">
       <section class="profile">
@@ -61,7 +59,7 @@
          <button tabindex="4" type="button" class="popup__close"></button>
       </div>
    </div>
-   <div class="popup popup_type_img">
+   <div class="popup " id="popup_type_img">
       <div class="popup__imgBlock">
          <img src="#" alt="" class="popup__img">
          <div class="popup__caption"></div>
