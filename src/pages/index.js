@@ -4,11 +4,10 @@ import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
-import { initialCards as arrCards, config } from "../components/constans.js";
+import { initialCards as arrCards, config } from "../utils/constans.js";
 import './index.css';
 
 const formEditProfile = document.querySelector(".form_type_redact");
-const forms = document.querySelectorAll(".form");
 const jobInput = document.querySelector(".form__input_type_job");
 const nameInput = formEditProfile.querySelector(".form__input_type_name");
 const openPopupButtonProfile = document.querySelector(".profile__edit-button");
@@ -34,10 +33,10 @@ const popupCard = new PopupWithForm(".popup_type_card", {
 });
 popupCard.setEventListeners();
 
-const renderCardPage = new Section({items: arrCards, renderer: (item) => {
+const renderCardPage = new Section({renderer: (item) => {
 	renderCardPage.addItem(generateCard(item));
 }}, ".cards");
-renderCardPage.allCardRender();
+renderCardPage.renderer(arrCards);
 
 function generateCard(item) {
 	const card = new Card(item, "#card", handleCardClick);
@@ -45,10 +44,6 @@ function generateCard(item) {
 }
 function handleCardClick(item) {
 	zoomPopupImg.open(item);
-}
-function validationForm(item) {
-	const formValidation = new FormValidator(config, item);
-	formValidation.enableValidation();
 }
 function openPopupEdit() {
 	const actualDataPopupRedactProfile = userInfoPopupRedactProfile.getUserInfo();
@@ -62,7 +57,8 @@ function removeErrorCardPopup() {
 	popupCard.open();
 }
 
-forms.forEach(item => validationForm(item));
+validationFormAddCard.enableValidation();
+validationFormRedactProfile.enableValidation();
 addCardButton.addEventListener("click", removeErrorCardPopup);
 openPopupButtonProfile.addEventListener("click", openPopupEdit);
 
