@@ -1,6 +1,4 @@
-export {config, initialCards};
-
-const config = {
+export const config = {
 	formSelector: ".form",
 	inputSelector: ".form__input",
 	submitButtonSelector: ".form__save",
@@ -8,30 +6,19 @@ const config = {
 	inputErrorClass: "form__input_type_error",
 	errorClass: "form__input-error_active",
 };
+export const dataUserProfile = {
+	nameUserInfo: ".profile__title",
+	captionUserInfo: ".profile__subtitle",
+	imgUserInfo: ".profile__img"
+}
+export const formEditProfile = document.querySelector(".form_type_redact");
+export const profileImgBlock = document.querySelector(".profile__img-cover");
+export const jobInput = document.querySelector(".form__input_type_job");
+export const addCardButton = document.querySelector(".profile__add-button");
+export const formAddCard = document.querySelector(".form_type_card");
+export const formAvatarPopup = document.querySelector(".form_type_avatar");
+export const openPopupButtonProfile = document.querySelector(".profile__edit-button");
+export const nameInput = formEditProfile.querySelector(".form__input_type_name");
 
-const initialCards = [
-	{
-		name: "Frog",
-		link: "https://i.gifer.com/origin/6b/6b72817f6498f551062b2788084cb1f6_w200.gif"
-	},
-	{
-		name: "Ricardo",
-		link: "https://www.meme-arsenal.com/memes/c84127c51d392963f20772d51ed76ffd.jpg"
-	},
-	{
-		name: "Клоун",
-		link: "https://www.meme-arsenal.com/memes/308998085969483b920bf7bb77bf01f1.jpg"
-	},
-	{
-		name: "Simpsons",
-		link: "https://i.gifer.com/origin/ee/ee906a8fdddcf6a8f14d3faf63b1d078_w200.gif"
-	},
-	{
-		name: "Koreyka",
-		link: "https://media.tenor.com/K4pbXRYZmA8AAAAd/%D0%B0%D0%B1%D0%BE%D0%B1%D1%83%D1%81-%D0%B4%D0%B0%D1%88%D0%B0.gif"
-	},
-	{
-		name: "KoronaTime",
-		link: "https://s1.bloknot-krasnodar.ru/thumb/850x0xcut/upload/iblock/6af/4aumvukqnzwpv9ibeblhhjz6fbo419mm/b5b5db5b3f4507784922742775bd4dea.png"
-	}
-];
+
+

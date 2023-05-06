@@ -1,4 +1,4 @@
-.card__delite {
+.card__delete {
    transition: opacity 0.4s ease;
    cursor: pointer;
    background: url(../../../images/Trash.svg) no-repeat center;
@@ -10,6 +10,6 @@
    top: 20px;
    right: 20px;
  }
- .card__delite:hover {
+ .card__delete:hover {
    opacity: 0.6;
  }

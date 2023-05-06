@@ -6,3 +6,6 @@
    line-height: 17px;
    width: 100%;
 }
+.form__input:first-child { 
+   margin: 48px 0 0 0;
+}

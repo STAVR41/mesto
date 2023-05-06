@@ -15,13 +15,15 @@
    <main class="content">
       <section class="profile">
          <div class="profile__image-container">
-            <img src="https://www.meme-arsenal.com/memes/048239e4b5544e4436e202e413608ce9.jpg" alt="Изображение" class="profile__img">
+            <div class="profile__img-cover">
+               <img src="" alt="Изображение" class="profile__img">
+            </div>
             <div class="profile__container">
                <div class="profile__info-container">
-                  <h1 class="profile__title">Жак-Ив Кусто</h1>
+                  <h1 class="profile__title"></h1>
                   <button type="button" class="profile__edit-button"></button>
                </div>
-               <p class="profile__subtitle">Исследователь океана</p>
+               <p class="profile__subtitle"></p>
             </div>
          </div>
          <button type="button" class="profile__add-button"></button>
@@ -37,9 +39,11 @@
       <div class="popup__container">
          <h3 class="popup__title">Редактировать профиль</h3>
          <form action="#" name="form" novalidate class="form form_type_redact">
-            <input maxlength="40" minlength="2" id="name-input" tabindex="1" type="text" name="profileName" class="form__input form__input_type_name" placeholder="Имя" required>
+            <input maxlength="40" minlength="2" id="name-input" tabindex="1" type="text" name="profileName"
+               class="form__input form__input_type_name" placeholder="Имя" required>
             <span class="name-input-error form__input-error"></span>
-            <input maxlength="200" minlength="2" id="job-input" tabindex="2" type="text" name="profileJob" class="form__input form__input_type_job" placeholder="Профессия" required>
+            <input maxlength="200" minlength="2" id="job-input" tabindex="2" type="text" name="profileJob"
+               class="form__input form__input_type_job" placeholder="Профессия" required>
             <span class="job-input-error form__input-error"></span>
             <button tabindex="3" type="submit" class="form__save form__save_type_redact">Сохранить</button>
          </form>
@@ -50,16 +54,39 @@
       <div class="popup__container">
          <h3 class="popup__title">Новое место</h3>
          <form action="#" name="form" novalidate class="form form_type_card">
-            <input required maxlength="30" minlength="2" tabindex="1" type="text" name="cardName" id="cardName-input" class="form__input form__input_type_text" placeholder="Название">
+            <input required maxlength="30" minlength="2" tabindex="1" type="text" name="cardName" id="cardName-input"
+               class="form__input form__input_type_text" placeholder="Название">
             <span class="cardName-input-error form__input-error"></span>
-            <input required tabindex="2" type="url" name="cardImg" id="link-input" class="form__input form__input_type_link" placeholder="Ссылка на картинку">
+            <input required tabindex="2" type="url" name="cardImg" id="link-input"
+               class="form__input form__input_type_link" placeholder="Ссылка на картинку">
             <span class="link-input-error form__input-error"></span>
             <button tabindex="3" type="submit" class="form__save form__save_type_card">Создать</button>
          </form>
          <button tabindex="4" type="button" class="popup__close"></button>
       </div>
    </div>
-   <div class="popup " id="popup_type_img">
+   <div class="popup popup_type_delete">
+      <div class="popup__container">
+         <h3 class="popup__title">Вы уверены?</h3>
+         <form action="#" name="form" novalidate class="form">
+            <button tabindex="1" type="submit" class="form__save form__save_type_delete">Да</button>
+         </form>
+         <button tabindex="2" type="button" class="popup__close"></button>
+      </div>
+   </div>
+   <div class="popup popup_type_avatar">
+      <div class="popup__container">
+         <h3 class="popup__title">Обновить аватар</h3>
+         <form action="#" name="form" novalidate class="form form_type_avatar">
+            <input required tabindex="1" type="url" name="avatar" id="avatar-input"
+               class="form__input form__input_type_avatar" placeholder="Ссылка на картинку">
+            <span class="avatar-input-error form__input-error"></span>
+            <button tabindex="2" type="submit" class="form__save form__save_type_avatar">Сохранить</button>
+         </form>
+         <button tabindex="3" type="button" class="popup__close"></button>
+      </div>
+   </div>
+   <div class="popup popup_type_img">
       <div class="popup__imgBlock">
          <img src="#" alt="" class="popup__img">
          <div class="popup__caption"></div>
@@ -71,9 +98,12 @@
          <img src="#" alt="" class="card__img">
          <div class="card__text-block">
             <h2 class="card__title"></h2>
-            <button type="button" class="card__like"></button>
+            <div class="card__like-block">
+               <button type="button" class="card__like"></button>
+               <p class="card__counter"></p>
+            </div>
          </div>
-         <button class="card__delite" type="button"></button>
+         <button class="card__delete" type="button"></button>
       </article>
    </template>
 </body>
