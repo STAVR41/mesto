@@ -41,12 +41,18 @@ function generateCard(item) {
 		handleCardClick: (item) => zoomPopupImg.open(item),
 		addLike: (id) => {
 			api.addLike(id)
-				.then((res) => card.changeCounterLikes(res))
+				.then((res) => {
+					card.toggleLike();
+					card.changeCounterLikes(res)
+				})
 				.catch(err => console.log(err))
 		},
 		removeLike: (id) => {
 			api.removeLike(id)
-				.then((res) => card.changeCounterLikes(res))
+				.then((res) => {
+					card.toggleLike()
+					card.changeCounterLikes(res)
+				})
 				.catch(err => console.log(err))
 		}
 	});
@@ -104,8 +110,6 @@ const popupWithConfirmation = new PopupWithConfirmation(".popup_type_delete", it
 })
 const renderCardPage = new Section({ renderer: (item) => renderCardPage.addItem(generateCard(item)) }, ".cards");
 
-
-
 popupWithConfirmation.setEventListeners();
 zoomPopupImg.setEventListeners();
 popupRedactProfile.setEventListeners();
@@ -120,13 +124,12 @@ profileImgBlock.addEventListener("click", () => {
 	popupAvatar.open()
 	validationFormSetAvatar.removeError();
 })
-Promise.all([api.getInitialCards(), api.dataHeader()])
+Promise.all([api.getInitialCards(), api.getUserInfo()])
 	.then(([cards, userInfo]) => {
 		idUser = userInfo._id;
 		cards.reverse();
 		userInfoPopupRedactProfile.setUserInfo(userInfo)
-		renderCardPage.renderer(cards);
-
+		renderCardPage.renderItems(cards);
 	})
 	.catch((err) => console.log(err))
 

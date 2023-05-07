@@ -4,11 +4,14 @@ export default class Api {
         this._url = this._options.baseUrl;
         this._headers = this._options.headers;
     }
-    dataHeader() {
+    _checkStatusServer(res) {
+        return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
+    }
+    getUserInfo() {
         return fetch(`${this._url}/users/me`, {
             headers: this._headers,
         })
-            .then(res => res.json())
+            .then(res => this._checkStatusServer(res))
     }
     setAvatarUser(avatar) {
         return fetch(`${this._url}/users/me/avatar`, {
@@ -16,7 +19,7 @@ export default class Api {
             headers: this._headers,
             body: JSON.stringify({ avatar })
         })
-            .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
+            .then(res => this._checkStatusServer(res))
     }
     setProfileUser(name, about) {
         return fetch(`${this._url}/users/me`, {
@@ -24,13 +27,13 @@ export default class Api {
             headers: this._headers,
             body: JSON.stringify({ name, about })
         })
-            .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
+            .then(res => this._checkStatusServer(res))
     }
     getInitialCards() {
         return fetch(`${this._url}/cards`, {
             headers: this._headers
         })
-            .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
+            .then(res => this._checkStatusServer(res))
     }
     addNewCard(name, link) {
         return fetch(`${this._url}/cards`, {
@@ -38,28 +41,28 @@ export default class Api {
             headers: this._headers,
             body: JSON.stringify({ name, link })
         })
-            .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
+            .then(res => this._checkStatusServer(res))
     }
     addLike(id) {
         return fetch(`${this._url}/cards/${id}/likes`, {
             method: 'PUT',
             headers: this._headers,
         })
-            .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
+            .then(res => this._checkStatusServer(res))
     }
     removeLike(id) {
         return fetch(`${this._url}/cards/${id}/likes`, {
             method: 'DELETE',
             headers: this._headers,
         })
-            .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
+            .then(res => this._checkStatusServer(res))
     }
     deleteCard(id) {
         return fetch(`${this._url}/cards/${id}`, {
             method: 'DELETE',
             headers: this._headers
         })
-            .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
+            .then(res => this._checkStatusServer(res))
     }
 
 }                                                                                           
